@@ -8,7 +8,7 @@ function PinDetails() {
     const pin = location.state?.pin;
 
     function handleSave() {
-        axios.post("http://localhost:10000/savedImages", {
+        axios.post("https://pinterest-api-nw5v.onrender.com/savedImages", {
             image: pin.urls.regular,
             title: pin.alt_description || "Beautiful Photo",
             photographer: pin.user.name

@@ -9,7 +9,7 @@ function CreatePin() {
     function handleSubmit(event) {
         event.preventDefault();
 
-        axios.post("http://localhost:10000/pins", {
+        axios.post("https://pinterest-api-nw5v.onrender.com/pins", {
             title: title,
             image: image,
             description: description

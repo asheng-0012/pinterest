@@ -9,7 +9,7 @@ function SavedImages() {
 
     useEffect(() => {
 
-        axios.get("http://localhost:10000/savedImages")
+        axios.get("https://pinterest-api-nw5v.onrender.com/savedImages")
             .then((response) => {
                 setSavedImages(response.data);
             })
@@ -17,7 +17,7 @@ function SavedImages() {
                 console.log(error);
             });
 
-        axios.get("http://localhost:10000/pins")
+        axios.get("https://pinterest-api-nw5v.onrender.com/pins")
             .then((response) => {
                 setMyPins(response.data);
             })
@@ -28,7 +28,7 @@ function SavedImages() {
     }, []);
 
     function deleteSavedImage(id) {
-        axios.delete(`http://localhost:10000/savedImages/${id}`)
+        axios.delete(`https://pinterest-api-nw5v.onrender.com/savedImages/${id}`)
             .then(() => {
                 setSavedImages(
                     savedImages.filter((image) => image.id !== id)
@@ -40,7 +40,7 @@ function SavedImages() {
     }
 
     function deleteMyPin(id) {
-        axios.delete(`http://localhost:10000/pins/${id}`)
+        axios.delete(`https://pinterest-api-nw5v.onrender.com/pins/${id}`)
             .then(() => {
                 setMyPins(
                     myPins.filter((pin) => pin.id !== id)
