@@ -20,13 +20,6 @@ function Navbar() {
                     </Link>
 
                     <Link
-                        className={`pb-nav-link${location.pathname === "/explore" ? " active" : ""}`}
-                        to="/explore"
-                    >
-                        Explore
-                    </Link>
-
-                    <Link
                         className={`pb-nav-link${location.pathname === "/saved" ? " active" : ""}`}
                         to="/saved"
                     >

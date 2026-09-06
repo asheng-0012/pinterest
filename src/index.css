@@ -122,16 +122,16 @@ p {
   text-transform: uppercase;
   color: var(--pb-black) !important;
   text-decoration: none !important;
-  padding: 0 1.1rem;
+  padding: 0 1.5rem;
+  margin: 0.3rem 0.5rem 0.3rem 0;
   display: flex;
   align-items: center;
-  border-right: var(--pb-rule-light);
+  border: var(--pb-rule-light);
   transition: var(--pb-transition);
 }
 
 .pb-nav-link:first-of-type {
   border-left: var(--pb-rule-light);
-  margin-left: 1.5rem;
 }
 
 .pb-nav-link:hover {
@@ -151,11 +151,11 @@ p {
   font-weight: 600;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  background: var(--pb-black);
+  background: rgb(226, 12, 12);
   color: var(--pb-white) !important;
   border: 2px solid var(--pb-black);
   border-radius: var(--pb-radius-btn);
-  padding: 0.55rem 1.4rem;
+  padding: 1rem 1.4rem;
   text-decoration: none !important;
   display: inline-flex;
   align-items: center;
