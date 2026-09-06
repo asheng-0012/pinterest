@@ -1,29 +1,639 @@
-*{
-  margin: 0px;
-  padding: 0px;
+/* ============================================================
+   PinBoard — "The Daily Board" Editorial Design System
+   Style: Newspaper / Print / Black & White
+   Fonts: Bebas Neue (display) · Playfair Display (serif) · IBM Plex Sans (ui)
+   ============================================================ */
+
+/* ---------- Design Tokens ---------- */
+:root {
+  --pb-black:        #0a0a0a;
+  --pb-black-soft:   #1c1c1c;
+  --pb-gray-dark:    #3a3a3a;
+  --pb-gray-mid:     #888888;
+  --pb-gray-light:   #d4d4d4;
+  --pb-gray-subtle:  #f0eeea;   /* Warm newsprint tint */
+  --pb-white:        #fafaf8;   /* Newsprint off-white */
+
+  --pb-rule-heavy:   3px solid var(--pb-black);
+  --pb-rule-mid:     1.5px solid var(--pb-black);
+  --pb-rule-light:   1px solid var(--pb-gray-light);
+  --pb-rule-dotted:  1px dotted var(--pb-gray-mid);
+
+  --pb-radius-card:  0px;       /* Sharp corners — editorial/print */
+  --pb-radius-btn:   0px;
+  --pb-radius-input: 0px;
+
+  --pb-transition:   all 0.18s ease;
+
+  /* Font stacks */
+  --font-display:   'Bebas Neue', 'Impact', 'Arial Black', sans-serif;
+  --font-serif:     'Playfair Display', 'Georgia', serif;
+  --font-ui:        'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
+}
+
+/* ---------- Reset ---------- */
+*, *::before, *::after {
+  margin: 0; padding: 0;
   box-sizing: border-box;
-  font-family: 'Poppins', sans-serif;
 }
 
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-ui);
+  background-color: var(--pb-white);
+  color: var(--pb-black);
+  font-size: 15px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ---------- Typographic Scale ---------- */
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  font-weight: 400;             /* Bebas Neue is naturally bold */
+  letter-spacing: 0.04em;
+  line-height: 0.95;
+  text-transform: uppercase;
+  color: var(--pb-black);
+}
+
+h5, h6 {
+  font-family: var(--font-serif);
+  font-weight: 700;
+  color: var(--pb-black);
+  letter-spacing: -0.01em;
+}
+
+p {
+  font-family: var(--font-ui);
+  color: var(--pb-gray-dark);
+  font-size: 0.875rem;
+  line-height: 1.7;
+}
+
+/* ---------- Masthead Navbar ---------- */
+.pb-navbar {
+  background: var(--pb-white);
+  border-bottom: var(--pb-rule-heavy);
+  padding: 0;
+  position: sticky;
+  top: 0;
+  z-index: 1030;
+}
+
+/* Top thin rule accent line */
+.pb-navbar::before {
+  content: "";
+  display: block;
+  height: 4px;
+  background: var(--pb-black);
+}
+
+.pb-navbar .container,
+.pb-navbar-inner {
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+  min-height: 64px;
+}
+
+.pb-brand {
+  font-family: var(--font-display);
+  font-size: 2.1rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--pb-black) !important;
+  text-decoration: none !important;
+  display: flex;
+  align-items: center;
+  padding: 0 1.5rem 0 0;
+  border-right: var(--pb-rule-mid);
+  line-height: 1;
+}
+
+.pb-brand::before { display: none; }
+
+.pb-nav-link {
+  font-family: var(--font-ui);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--pb-black) !important;
+  text-decoration: none !important;
+  padding: 0 1.1rem;
+  display: flex;
+  align-items: center;
+  border-right: var(--pb-rule-light);
+  transition: var(--pb-transition);
+}
+
+.pb-nav-link:first-of-type {
+  border-left: var(--pb-rule-light);
+  margin-left: 1.5rem;
+}
+
+.pb-nav-link:hover {
+  background: var(--pb-black);
+  color: var(--pb-white) !important;
+}
+
+.pb-nav-link.active {
+  background: var(--pb-black);
+  color: var(--pb-white) !important;
+}
+
+/* ---------- Buttons ---------- */
+.pb-btn-accent {
+  font-family: var(--font-ui);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  background: var(--pb-black);
+  color: var(--pb-white) !important;
+  border: 2px solid var(--pb-black);
+  border-radius: var(--pb-radius-btn);
+  padding: 0.55rem 1.4rem;
+  text-decoration: none !important;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: var(--pb-transition);
+}
+
+.pb-btn-accent:hover {
+  background: var(--pb-white);
+  color: var(--pb-black) !important;
+}
+
+.pb-btn-outline {
+  font-family: var(--font-ui);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  background: transparent;
+  color: var(--pb-black) !important;
+  border: 2px solid var(--pb-black);
+  border-radius: var(--pb-radius-btn);
+  padding: 0.5rem 1.3rem;
+  text-decoration: none !important;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: var(--pb-transition);
+}
+
+.pb-btn-outline:hover {
+  background: var(--pb-black);
+  color: var(--pb-white) !important;
+}
+
+.pb-btn-danger {
+  font-family: var(--font-ui);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  background: transparent;
+  color: var(--pb-gray-mid) !important;
+  border: 1px solid var(--pb-gray-light);
+  border-radius: var(--pb-radius-btn);
+  padding: 0.3rem 0.85rem;
+  cursor: pointer;
+  transition: var(--pb-transition);
+}
+
+/* Download button — red on hover */
+.pb-btn-download {
+  font-family: var(--font-ui);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  background: transparent;
+  color: var(--pb-black) !important;
+  border: 2px solid var(--pb-black);
+  border-radius: var(--pb-radius-btn);
+  padding: 0.5rem 1.3rem;
+  text-decoration: none !important;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: var(--pb-transition);
+}
+
+.pb-btn-download:hover {
+  background: #dc2626;
+  border-color: #dc2626;
+  color: #fff !important;
+}
+
+.pb-btn-danger:hover {
+  background: var(--pb-black);
+  color: var(--pb-white) !important;
+  border-color: var(--pb-black);
+}
+
+/* ---------- Search Bar ---------- */
+.pb-search-wrapper {
+  position: relative;
+  max-width: 620px;
+  margin: 0 auto;
+}
+
+.pb-search-input {
+  width: 100%;
+  height: 50px;
+  padding: 0 5rem 0 1.2rem;
+  border: var(--pb-rule-mid);
+  border-radius: var(--pb-radius-input);
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 0.95rem;
+  color: var(--pb-black);
+  background: var(--pb-white);
+  outline: none;
+  transition: var(--pb-transition);
+}
+
+.pb-search-input::placeholder {
+  color: var(--pb-gray-mid);
+  font-style: italic;
+}
+
+.pb-search-input:focus {
+  box-shadow: 4px 4px 0 var(--pb-black);
+  border-color: var(--pb-black);
+}
+
+.pb-search-btn {
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 100%;
+  padding: 0 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--pb-black);
+  color: var(--pb-white);
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-ui);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  transition: var(--pb-transition);
+}
+
+.pb-search-btn:hover {
+  background: var(--pb-black-soft);
+  transform: none;
+}
+
+/* ---------- HOME HERO — Broadsheet Masthead ---------- */
+.pb-hero {
+  text-align: center;
+  padding: 4rem 1rem 3rem;
+  position: relative;
+}
+
+/* Top rule */
+.pb-hero::before {
+  content: "";
+  display: block;
+  height: 3px;
+  background: var(--pb-black);
+  margin-bottom: 2rem;
+}
+
+/* Bottom rule */
+.pb-hero::after {
+  content: "";
+  display: block;
+  height: 1px;
+  background: var(--pb-gray-light);
+  margin-top: 2.5rem;
+}
+
+.pb-hero-kicker {
+  font-family: var(--font-ui);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--pb-gray-mid);
+  margin-bottom: 1rem;
+  display: block;
+}
+
+.pb-hero-display {
+  font-family: var(--font-display);
+  font-size: clamp(4.5rem, 13vw, 10rem);
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  line-height: 0.88;
+  text-transform: uppercase;
+  color: var(--pb-black);
+  margin-bottom: 1.5rem;
+}
+
+/* Decorative rule between heading lines */
+.pb-hero-rule {
+  display: block;
+  height: 4px;
+  background: var(--pb-black);
+  width: 80px;
+  margin: 0.8rem auto;
+}
+
+.pb-hero-sub {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(0.9rem, 2vw, 1.15rem);
+  color: var(--pb-gray-dark);
+  max-width: 480px;
+  margin: 0 auto;
+  line-height: 1.75;
+}
+
+/* Standard hero for inner pages */
+.pb-hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 7vw, 6rem);
+  line-height: 0.9;
+  letter-spacing: 0.03em;
+  margin-bottom: 0.75rem;
+}
+
+.pb-hero p {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 1rem;
+  color: var(--pb-gray-dark);
+  max-width: 420px;
+  margin: 0 auto;
+}
+
+/* ---------- Section Title (column heading) ---------- */
+.pb-section-title {
+  font-family: var(--font-ui);
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--pb-gray-mid);
+  margin-bottom: 1.25rem;
+  padding-bottom: 0.5rem;
+  border-bottom: var(--pb-rule-mid);
+  display: block;
+}
+
+/* ---------- Masonry Grid ---------- */
 .masonry {
-  columns: 4 250px;
-  column-gap: 20px;
+  columns: 4 210px;
+  column-gap: 1px;               /* Tight column rules — like a newspaper grid */
+  background: var(--pb-gray-light); /* The gaps become the "rule lines" */
 }
 
+/* ---------- Pin Card — Article Card ---------- */
 .pin-card {
   break-inside: avoid;
-  margin-bottom: 20px;
-  background: white;
-  border-radius: 15px;
+  margin-bottom: 1px;
+  background: var(--pb-white);
   overflow: hidden;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: var(--pb-transition);
+  cursor: pointer;
+  position: relative;
+}
+
+.pin-card:hover {
+  background: var(--pb-gray-subtle);
+}
+
+/* Invert image slightly on hover */
+.pin-card:hover img {
+  filter: contrast(1.05) brightness(0.96);
 }
 
 .pin-card img {
   width: 100%;
   display: block;
+  object-fit: cover;
+  transition: var(--pb-transition);
 }
 
-.pin-card h5 {
-  margin-bottom: 8px;
+/* Subtle gradient overlay on hover only */
+.pin-card .pin-card-overlay {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(10,10,10,0);
+  transition: var(--pb-transition);
+  pointer-events: none;
+}
+
+.pin-card:hover .pin-card-overlay {
+  background: rgba(10,10,10,0.04);
+}
+
+/* Card body — article caption block */
+.pin-card-body {
+  padding: 0.75rem 0.9rem 0.9rem;
+  border-top: 1.5px solid var(--pb-black);
+}
+
+.pin-card-body h5 {
+  font-family: var(--font-serif);
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--pb-black);
+  margin-bottom: 0.2rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  line-height: 1.35;
+}
+
+.pin-card-body .pin-meta {
+  font-family: var(--font-ui);
+  font-size: 0.72rem;
+  color: var(--pb-gray-mid);
+  margin-bottom: 0.45rem;
+  letter-spacing: 0.01em;
+}
+
+.pin-card-body .pin-badge {
+  font-family: var(--font-ui);
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--pb-gray-mid);
+  border: 1px solid var(--pb-gray-light);
+  padding: 0.15rem 0.5rem;
+}
+
+/* ---------- Detail Page ---------- */
+
+/* Full-viewport layout wrapper */
+.pb-detail-page {
+  min-height: calc(100vh - 72px); /* subtract sticky navbar height */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+/* Make the row stretch to fill remaining height */
+.pb-detail-row {
+  flex: 1;
+  display: flex;
+  align-items: stretch;
+  min-height: calc(100vh - 72px - 80px); /* minus navbar + back-btn row */
+}
+
+/* Image column fills the full row height */
+.pb-detail-img-col {
+  display: flex;
+  align-items: stretch;
+}
+
+/* Image itself fills the column */
+.pb-detail-img {
+  width: 100%;
+  height: 100%;
+  max-height: calc(100vh - 130px);
+  object-fit: cover;
+  display: block;
+  border: var(--pb-rule-mid);
+  box-shadow: 6px 6px 0 var(--pb-black);
+}
+
+/* Info column — vertically centered */
+.pb-detail-info-col {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-left: 2.5rem;
+}
+
+.pb-detail-meta {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 0.92rem;
+  color: var(--pb-gray-dark);
+  margin-bottom: 1.5rem;
+}
+
+.pb-detail-meta strong {
+  font-style: normal;
+  color: var(--pb-black);
+}
+
+.pb-detail-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  align-items: center;
+}
+
+/* ---------- Create Pin Form ---------- */
+.pb-form-card {
+  background: var(--pb-white);
+  border: var(--pb-rule-mid);
+  box-shadow: 6px 6px 0 var(--pb-black);
+  padding: 2.5rem;
+  max-width: 540px;
+  margin: 0 auto;
+}
+
+.pb-form-label {
+  font-family: var(--font-ui);
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--pb-gray-dark);
+  margin-bottom: 0.4rem;
+  display: block;
+}
+
+.pb-form-control {
+  width: 100%;
+  padding: 0.7rem 1rem;
+  border: var(--pb-rule-mid);
+  border-radius: var(--pb-radius-input);
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 0.92rem;
+  color: var(--pb-black);
+  background: var(--pb-white);
+  outline: none;
+  transition: var(--pb-transition);
+}
+
+.pb-form-control::placeholder {
+  color: var(--pb-gray-mid);
+}
+
+.pb-form-control:focus {
+  box-shadow: 4px 4px 0 var(--pb-black);
+  outline: none;
+}
+
+/* ---------- Divider — Column rule ---------- */
+.pb-divider {
+  border: none;
+  border-top: var(--pb-rule-mid);
+  margin: 2.5rem 0;
+}
+
+/* ---------- Empty State ---------- */
+.pb-empty {
+  text-align: center;
+  padding: 4rem 1rem;
+  border: var(--pb-rule-light);
+  margin-bottom: 2rem;
+}
+
+.pb-empty-icon {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  opacity: 0.25;
+}
+
+.pb-empty p {
+  font-family: var(--font-serif);
+  font-style: italic;
+  color: var(--pb-gray-mid);
+}
+
+.pb-empty a {
+  color: var(--pb-black) !important;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 768px) {
+  .masonry {
+    columns: 2 150px;
+  }
+  .pb-form-card { padding: 1.5rem; box-shadow: 4px 4px 0 var(--pb-black); }
+  .pb-hero-display { letter-spacing: 0.01em; }
+  .pb-brand { font-size: 1.6rem; }
+}
+
+@media (max-width: 480px) {
+  .masonry { columns: 2 120px; }
 }

@@ -52,38 +52,62 @@ function SavedImages() {
     }
 
     return (
-        <div className="container py-4">
+        <div className="container py-5">
 
-            <h1 className="mb-5">My Pins</h1>
-
-            <h2 className="mb-4">Saved Images</h2>
-
-            <div className="masonry mb-5">
-                {savedImages.map((image) => (
-                    <SavedCard
-                        key={image.id}
-                        image={image}
-                        onDelete={deleteSavedImage}
-                    />
-                ))}
+            <div className="pb-hero mb-2">
+                <h1>My Pins</h1>
+                <p>Your saved images and uploaded pins, all in one place.</p>
             </div>
 
-            <h2 className="mb-4">My Uploaded Pins</h2>
+            <hr className="pb-divider" />
 
-            <div className="masonry">
-                {myPins.map((pin) => (
-                    <SavedCard
-                        key={pin.id}
-                        image={{
-                            id: pin.id,
-                            image: pin.image,
-                            title: pin.title,
-                            photographer: "You"
-                        }}
-                        onDelete={deleteMyPin}
-                    />  
-                ))}
-            </div>
+            <p className="pb-section-title">Saved Images</p>
+
+            {savedImages.length === 0 ? (
+                <div className="pb-empty">
+                    <div className="pb-empty-icon">📌</div>
+                    <p>No saved images yet. Explore and save pins you love!</p>
+                </div>
+            ) : (
+                <div className="masonry mb-5">
+                    {savedImages.map((image) => (
+                        <SavedCard
+                            key={image.id}
+                            image={image}
+                            onDelete={deleteSavedImage}
+                        />
+                    ))}
+                </div>
+            )}
+
+            <hr className="pb-divider" />
+
+            <p className="pb-section-title">My Uploaded Pins</p>
+
+            {myPins.length === 0 ? (
+                <div className="pb-empty">
+                    <div className="pb-empty-icon">🖼️</div>
+                    <p>
+                        You haven't created any pins yet.{" "}
+                        <a href="/create">Create one now!</a>
+                    </p>
+                </div>
+            ) : (
+                <div className="masonry">
+                    {myPins.map((pin) => (
+                        <SavedCard
+                            key={pin.id}
+                            image={{
+                                id: pin.id,
+                                image: pin.image,
+                                title: pin.title,
+                                photographer: "You"
+                            }}
+                            onDelete={deleteMyPin}
+                        />
+                    ))}
+                </div>
+            )}
 
         </div>
     );

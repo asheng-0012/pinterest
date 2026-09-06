@@ -15,8 +15,8 @@ function Mgallery() {
         Authorization: `Client-ID ${import.meta.env.VITE_UNSPLASH_ACCESS_KEY}`
       },
       params: {
-        query: query || "nature",
-        per_page: 20
+        query: query || "art",
+        per_page: 30
       }
     })
     .then((response) => {

@@ -1,9 +1,10 @@
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 function PinDetails() {
 
     const location = useLocation();
+    const navigate = useNavigate();
     const pin = location.state?.pin;
 
     function handleSave() {
@@ -38,41 +39,56 @@ function PinDetails() {
     if (!pin) {
         return (
             <div className="container py-5">
-                <h3>Image not found</h3>
+                <div className="pb-empty">
+                    <div className="pb-empty-icon">🖼️</div>
+                    <h3>Image not found</h3>
+                    <p>This pin may have been removed or the link is invalid.</p>
+                </div>
             </div>
         );
     }
 
     return (
-        <div className="container py-5">
+        <div className="container pb-detail-page py-4">
 
-            <div className="row">
+            <button
+                className="pb-btn-outline mb-4"
+                onClick={() => navigate(-1)}
+            >
+                ← Back
+            </button>
 
-                <div className="col-md-7">
+            <div className="row pb-detail-row g-4">
+
+                <div className="col-md-7 pb-detail-img-col">
                     <img
                         src={pin.urls.regular}
                         alt={pin.alt_description}
-                        className="img-fluid rounded"
+                        className="pb-detail-img"
                     />
                 </div>
 
-                <div className="col-md-5">
+                <div className="col-md-5 pb-detail-info-col">
 
-                    <h1 className="mt-3 mt-md-0">
+                    <h1 className="mb-2">
                         {pin.alt_description || "Beautiful Photo"}
                     </h1>
 
-                    <p>
+                    <p className="pb-detail-meta">
                         Photo by <strong>{pin.user.name}</strong>
                     </p>
 
-                    <button className="btn btn-primary me-2" onClick={handleSave}>
-                        Save Image
-                    </button>
+                    <hr className="pb-divider" />
 
-                    <button className="btn btn-danger" onClick={handleDownload}>
-                        Download
-                    </button>
+                    <div className="pb-detail-actions">
+                        <button className="pb-btn-accent" onClick={handleSave}>
+                            ♡ Save Pin
+                        </button>
+
+                        <button className="pb-btn-download" onClick={handleDownload}>
+                            ↓ Download
+                        </button>
+                    </div>
 
                 </div>
 

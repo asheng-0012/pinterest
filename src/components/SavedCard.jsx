@@ -5,31 +5,34 @@ function SavedCard({ image, onDelete }) {
     <Link
       to={`/saved/${image.id}`}
       state={{ image: image }}
-      className="text-decoration-none text-dark"
+      className="text-decoration-none"
     >
       <div className="pin-card">
+
+        <div className="pin-card-overlay" />
 
         <img
           src={image.image}
           alt={image.title}
+          loading="lazy"
         />
 
-        <div className="p-3">
+        <div className="pin-card-body">
 
           <h5>{image.title}</h5>
 
-          <p className="text-muted mb-2">
-            Photo by {image.photographer}
+          <p className="pin-meta">
+            By {image.photographer}
           </p>
 
           <button
-            className="btn btn-danger"
+            className="pb-btn-danger"
             onClick={(event) => {
               event.preventDefault();
               onDelete(image.id);
             }}
           >
-            Delete
+            Remove
           </button>
 
         </div>

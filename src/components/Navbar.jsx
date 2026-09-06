@@ -1,28 +1,40 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 function Navbar() {
-    return (
-        <nav className="navbar bg-light">
-            <div className="container">
+    const location = useLocation();
 
-                <Link className="navbar-brand fw-bold" to="/">
+    return (
+        <nav className="pb-navbar">
+            <div className="container pb-navbar-inner">
+
+                <Link className="pb-brand" to="/">
                     PinBoard
                 </Link>
 
-                <div>
-                    <Link className="btn btn-link" to="/">
+                <div className="d-flex align-items-stretch">
+                    <Link
+                        className={`pb-nav-link${location.pathname === "/" ? " active" : ""}`}
+                        to="/"
+                    >
                         Home
                     </Link>
 
-                    <Link className="btn btn-link" to="/explore">
+                    <Link
+                        className={`pb-nav-link${location.pathname === "/explore" ? " active" : ""}`}
+                        to="/explore"
+                    >
                         Explore
                     </Link>
-                    <Link className="btn btn-link" to="/saved">
+
+                    <Link
+                        className={`pb-nav-link${location.pathname === "/saved" ? " active" : ""}`}
+                        to="/saved"
+                    >
                         My Pins
                     </Link>
 
-                    <Link className="btn btn-primary" to="/create">
-                        Create Pin
+                    <Link className="pb-btn-accent ms-3 my-auto me-0" to="/create">
+                        + Create
                     </Link>
                 </div>
 

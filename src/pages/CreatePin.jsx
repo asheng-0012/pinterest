@@ -29,49 +29,54 @@ function CreatePin() {
     return (
         <div className="container py-5">
 
-            <h1 className="mb-4">Create a Pin</h1>
+            <div className="pb-hero mb-4">
+                <h1>Create a Pin</h1>
+                <p>Share something beautiful with the world.</p>
+            </div>
 
-            <form onSubmit={handleSubmit}>
+            <div className="pb-form-card">
+                <form onSubmit={handleSubmit}>
 
-                <div className="mb-3">
-                    <label className="form-label">
-                        Title
-                    </label>
+                    <div className="mb-4">
+                        <label className="pb-form-label" htmlFor="pin-title">
+                            Title
+                        </label>
+                        <input
+                            id="pin-title"
+                            type="text"
+                            className="pb-form-control"
+                            value={title}
+                            onChange={(event) => setTitle(event.target.value)}
+                            placeholder="Give your pin a title…"
+                            required
+                        />
+                    </div>
 
-                    <input
-                        type="text"
-                        className="form-control"
-                        value={title}
-                        onChange={(event) => setTitle(event.target.value)}
-                        placeholder="Enter pin title"
-                        required
-                    />
-                </div>
+                    <div className="mb-5">
+                        <label className="pb-form-label" htmlFor="pin-image-url">
+                            Image URL
+                        </label>
+                        <input
+                            id="pin-image-url"
+                            type="text"
+                            className="pb-form-control"
+                            value={image}
+                            onChange={(event) => setImage(event.target.value)}
+                            placeholder="Paste an image URL…"
+                            required
+                        />
+                    </div>
 
+                    <button
+                        type="submit"
+                        className="pb-btn-accent w-100"
+                        style={{ justifyContent: "center" }}
+                    >
+                        Publish Pin
+                    </button>
 
-                <div className="mb-3">
-                    <label className="form-label">
-                        Image URL
-                    </label>
-
-                    <input
-                        type="text"
-                        className="form-control"
-                        value={image}
-                        onChange={(event) => setImage(event.target.value)}
-                        placeholder="Paste image URL"
-                        required
-                    />
-                </div>
-
-                <button
-                    type="submit"
-                    className="btn btn-primary"
-                >
-                    Create Pin
-                </button>
-
-            </form>
+                </form>
+            </div>
 
         </div>
     );
