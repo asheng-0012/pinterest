@@ -1,0 +1,29 @@
+*{
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+.masonry {
+  columns: 4 250px;
+  column-gap: 20px;
+}
+
+.pin-card {
+  break-inside: avoid;
+  margin-bottom: 20px;
+  background: white;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.pin-card img {
+  width: 100%;
+  display: block;
+}
+
+.pin-card h5 {
+  margin-bottom: 8px;
+}

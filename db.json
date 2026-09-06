@@ -1,0 +1,19 @@
+{
+  "pins": [
+    {
+      "title": "my mountain",
+      "image": "https://images.unsplash.com/photo-1500534623283-312aade485b7",
+      "id": "0w_b1ZeuniI",
+      "description": "A beautiful mountain landscape."
+    }
+  ],
+  "savedImages": [
+    {
+      "image": "https://images.unsplash.com/photo-1751225750479-43ad27b94fa0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDU3MjE0fDB8MXxzZWFyY2h8MXx8bmF0dXJlfGVufDB8fHx8MTc4ODcyMDY1MXww&ixlib=rb-4.1.0&q=80&w=1080",
+      "title": "A deer walks through wildflowers near a snowy mountain",
+      "photographer": "Emma Swoboda",
+      "id": "bYx-VJhhauY"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}
